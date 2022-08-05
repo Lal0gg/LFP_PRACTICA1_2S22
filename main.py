@@ -12,6 +12,8 @@ wndw_editcourse = None
 wndw_deletecourse = None
 wndw_credicount = None
 
+ListaCursos=[]
+
 def getBackMainMenuFromManage():
     global wndw_managecourse
     wndw_managecourse.destroy()
