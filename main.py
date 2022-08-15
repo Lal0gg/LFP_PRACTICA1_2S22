@@ -1,7 +1,12 @@
+from ast import IsNot
+import os
+from queue import Empty
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+from tkinter import messagebox
 from tkinter.ttk import Treeview
+from curso import Curso
 
 wndw_menu = None
 wndw_fileupload = None
@@ -11,7 +16,6 @@ wndw_addcourse = None
 wndw_editcourse = None
 wndw_deletecourse = None
 wndw_credicount = None
-
 ListaCursos=[]
 
 def getBackMainMenuFromManage():
@@ -88,6 +92,33 @@ def window_mainMenu():
     buttonMainMenuOut.place(x=220,y=300)
     wndw_menu.mainloop()
 
+def readFile(txt):
+    print("xd",txt)
+    if txt == "":
+        mensaje=messagebox.showwarning("Archivos","No se ha cargado ningún archivo")
+        return mensaje
+    else:
+        partsOfnameFile=txt.split('.')
+        print(partsOfnameFile)
+        print("longitud",len(partsOfnameFile))
+        pos1=partsOfnameFile[0]
+        if(os.path.exists(str(pos1)+".lfp")):
+            if len(partsOfnameFile)!=2:
+                messagebox.showwarning("Archivos","Ingrese un archivo correcto")
+            else:
+                if(partsOfnameFile[1] == 'lfp'):
+                    file =open(txt,'r', encoding="utf-8")
+                    line=file.read()
+                    file.close()
+                    print(line)
+                    print("")
+                    messagebox.showinfo("Archivos","Archivos Cargados")
+                else:
+                    messagebox.showwarning("Archivos","Ingrese un archivo correcto")
+                    print("Ingrese un archivo correcto :( ")
+        else:
+            messagebox.showwarning("Archivos","Ingrese un archivo correcto")
+
 def window_fileupload():
     global wndw_fileupload
     global wndw_menu
@@ -107,13 +138,17 @@ def window_fileupload():
     #Configuracion textbox
     textboxRoute=Entry(wndw_fileupload)
     textboxRoute.place(x=195,y=84,width=300,height=24)
+
+
     #Configuración Botones
-    buttonSelectRoute=Button(wndw_fileupload,text="Seleccionar",width=11,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=8)
+    buttonSelectRoute=Button(wndw_fileupload,text="Seleccionar",width=11,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=8,command=lambda:readFile(textboxRoute.get().strip()))
     buttonSelectRoute.place(x=270,y=140)
 
     buttonBackMainMenu=Button(wndw_fileupload,text="Regresar",width=11,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=8,command=getBackMainMenuFromFileUpload)
     buttonBackMainMenu.place(x=498,y=230)
     wndw_fileupload.mainloop()
+    
+    
 
 def window_managecourse():
     global wndw_managecourse
@@ -421,4 +456,5 @@ def window_creditcount():
 
 
 
+#readFile()
 window_mainMenu()

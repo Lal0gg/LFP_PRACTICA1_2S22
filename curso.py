@@ -7,3 +7,5 @@ class Curso:
         self.Semester = Semester
         self.Credits = Credits
         self.Status = Status
+
+
