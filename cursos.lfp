@@ -1,0 +1,41 @@
+17,Social Humanística 1,,1,1,4,0
+101,Matematica Basica 1,,1,1,7,0
+69,Técnica complementaria 1,,1,1,3,0
+152,Física 2,107;150,1,4,6,0
+39,Deportes 1,,0,1,1,-1
+348,Quimica General 1,,1,1,3,0
+6,Idioma técnico 1,,0,0,2,-1
+19,Social Humaní­stica 2,17,1,2,4,0
+103,Matematica Basica 2,101,1,2,7,0
+5,Tecnicas de Estudio e Inves,,1,2,3,0
+147,Fisica Básica,101,1,2,5,0
+40,Deportes 2,39,0,2,1,-1
+8,Idioma técnico 2,6,0,2,2,-1
+795,Lógica de Sistemas,103,1,3,2,0
+960,Mate Computo 1,103,1,3,5,0
+770,IPC1,103,1,3,4,0
+107,Mate Intermedia 1,103,1,3,10,0
+150,Física 1,103;147,1,3,6,0
+9,Idioma Tecnico 3,8,0,3,2,-1
+732,Estadística 1,107;005,1,4,5,0
+796,Lenguajes formales,770;795;960,1,4,3,1
+962,Mate Computo 2,960;770;795,1,4,5,1
+771,IPC2,107;770;795;960,1,4,5,1
+10,Logica,19,0,4,2,1
+112,Mate Inter 2,107,1,4,5,0
+114,Mate Inter 3,107,1,4,5,0
+152,Física 2,107;150,1,4,6,0
+11,Idioma Tecnico 4,9,0,4,2,-1
+2025,Practicas Iniciales,103;770,1,4,0,1
+736,Análisis Prob,732,1,5,4,1
+777,Compi 1,771;796;962,1,5,4,-1
+964,Orga Compu,152;771;962,1,5,3,-1
+772,Estructura de Datos,771;796;962,1,5,5,-1
+18,Filosofia de la Ciencia,19,0,5,3,-1
+116,Mate Apli 3,112;114,1,5,5,0
+118,Mate Apli 1,112;114,1,5,6,0
+368,Principios,732;152;348,0,5,3,-1
+650,Conta,,0,5,3,-1
+28,Ecologia,,0,5,3,-1
+152,Física 2,107;150,1,4,6,0
+

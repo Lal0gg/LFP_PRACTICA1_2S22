@@ -1,4 +1,3 @@
-from ast import IsNot
 import os
 from queue import Empty
 import tkinter as tk
@@ -6,8 +5,10 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter.ttk import Treeview
+from typing import Counter
 from curso import Curso
 
+#Variables Para Las Ventanas
 wndw_menu = None
 wndw_fileupload = None
 wndw_managecourse = None
@@ -16,8 +17,41 @@ wndw_addcourse = None
 wndw_editcourse = None
 wndw_deletecourse = None
 wndw_credicount = None
-ListaCursos=[]
+wndw_showcourse=None
 
+#Lista de Cursos
+ListaCursos=[]
+#Contador de Cursos
+ContaCursos =0
+
+#Variables Para Mostrar Curso
+textboxCoursename =None
+textboxCoursePreRequis = None
+textboxCourseSemester = None
+textboxCourseOptionality = None
+textboxCourseCredits = None
+textboxCourseStatus = None
+
+#Textbos para Agregar curso
+textboxCourseidadd= None
+textboxCoursenameadd= None
+textboxCoursePreRequisadd= None
+textboxCourseSemesteradd= None
+textboxCourseOptionalityadd= None
+textboxCourseCreditsadd= None
+textboxCourseStatusadd= None
+
+#TextBox para Editar curso
+textboxEditCourseided= None
+textboxEditCoursenameed= None
+textboxEditCoursePreRequised= None
+textboxEditCourseSemestered= None
+textboxEditCourseOptionalityed= None
+textboxEditCourseCreditsed= None
+textboxEditCourseStatused= None
+
+#TextBox Para eliminar Curso
+textboxidCoursedel = None
 def getBackMainMenuFromManage():
     global wndw_managecourse
     wndw_managecourse.destroy()
@@ -36,6 +70,11 @@ def getBackMainMenuFromCreditCount():
 def getBackManageCourseFromListCourse():
     global wndw_listcourse
     wndw_listcourse.destroy()
+    window_managecourse()
+
+def getBackManageCourseFromShowCourse():
+    global wndw_showcourse
+    wndw_showcourse.destroy()
     window_managecourse()
 
 def getBackManageCourseFromAddCourse():
@@ -93,6 +132,8 @@ def window_mainMenu():
     wndw_menu.mainloop()
 
 def readFile(txt):
+    global ContaCursos
+    global ListaCursos
     print("xd",txt)
     if txt == "":
         mensaje=messagebox.showwarning("Archivos","No se ha cargado ningún archivo")
@@ -110,7 +151,36 @@ def readFile(txt):
                     file =open(txt,'r', encoding="utf-8")
                     line=file.read()
                     file.close()
-                    print(line)
+                    #print(line)
+                    print("")
+                    newLine = line.split("\n")
+                    for c in newLine:
+                        if c != "":
+                            niuLine= c.split(",")
+                            print(niuLine)
+                            ContaCursos+=1
+                            idcourseaux=0
+                            namecourseaux=""
+                            prerequisiteaux=0
+                            optinalityaux=0
+                            semesteraux=0
+                            creditsaux=0
+                            statusaux=0
+                            idcourseaux=niuLine[0]
+                            namecourseaux = niuLine[1]
+                            prerequisiteaux = niuLine[2]
+                            optinalityaux =niuLine[3]
+                            semesteraux=niuLine[4]
+                            creditsaux =niuLine[5]
+                            statusaux = niuLine[6]
+                            Cursonew=Curso(idcourseaux,namecourseaux,prerequisiteaux,optinalityaux,semesteraux,creditsaux,statusaux)
+                            Cursonew.Counter=ContaCursos
+                            ListaCursos.append(Cursonew)
+                        for r in ListaCursos:
+                            print("____________________________________________________________")
+                            print("Curso No. ", str(r.Counter))
+                            print(" ID Curso: " +r.idCourse + " |Curso: "+r.NameCourse+" |PreReQuisito: " +r.PreRequisite+" |Opcionalidad: " +r.Optionality+ " |Semestre: " + r.Semester + " |Creditos: " + r.Credits + " |Estados: " + r.Status)
+                    print("Hay " + str(ContaCursos) + " Cursos")
                     print("")
                     messagebox.showinfo("Archivos","Archivos Cargados")
                 else:
@@ -147,8 +217,6 @@ def window_fileupload():
     buttonBackMainMenu=Button(wndw_fileupload,text="Regresar",width=11,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=8,command=getBackMainMenuFromFileUpload)
     buttonBackMainMenu.place(x=498,y=230)
     wndw_fileupload.mainloop()
-    
-    
 
 def window_managecourse():
     global wndw_managecourse
@@ -163,22 +231,27 @@ def window_managecourse():
     wndw_managecourse.config(relief="groove")
     #Configuración Botones
     buttonListCourses=Button(wndw_managecourse,text="Listar Cursos",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=window_listcouse)
-    buttonListCourses.place(x=250,y=70)
+    buttonListCourses.place(x=250,y=50)
+
+    buttonShowCourses=Button(wndw_managecourse,text="Mostrar Cursos",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=window_showcourse)
+    buttonShowCourses.place(x=250,y=110)
 
     buttonAddCourse=Button(wndw_managecourse,text="Agregar Curso",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=window_addcourse)
-    buttonAddCourse.place(x=250,y=130)
+    buttonAddCourse.place(x=250,y=170)
 
     buttonEditCourse=Button(wndw_managecourse,text="Editar Curso",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=window_editcourse)
-    buttonEditCourse.place(x=250,y=190)
+    buttonEditCourse.place(x=250,y=230)
 
     buttonDeleteCourse=Button(wndw_managecourse,text="Eliminar Curso",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=window_deleteCourse)
-    buttonDeleteCourse.place(x=250,y=250)
+    buttonDeleteCourse.place(x=250,y=290)
 
     buttonBackmainmenu=Button(wndw_managecourse,text="Regresar",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackMainMenuFromManage)
-    buttonBackmainmenu.place(x=250,y=310)
+    buttonBackmainmenu.place(x=250,y=350)
     wndw_managecourse.mainloop()
 
+
 def window_listcouse():
+    global ListaCursos
     global wndw_managecourse
     global wndw_listcourse
     wndw_managecourse.destroy()
@@ -212,6 +285,12 @@ def window_listcouse():
     TableListCourse.heading("col4",text="Semestre",anchor=CENTER)
     TableListCourse.heading("col5",text="Créditos",anchor=CENTER)
     TableListCourse.heading("col6",text="Estado",anchor=CENTER)
+    Cursosgg=[]
+    for uwu in ListaCursos:
+        Cursosgg.append((uwu.idCourse,uwu.NameCourse,uwu.PreRequisite,uwu.Optionality,uwu.Semester,uwu.Credits,uwu.Status))
+    for ewe in Cursosgg:
+        TableListCourse.insert("",tk.END,values=ewe)
+
     TableListCourse.pack()
     TableListCourse.place(x=20,y=35)
 
@@ -220,12 +299,159 @@ def window_listcouse():
     buttonBackManageCourse.place(x=575,y=460)
     wndw_listcourse.mainloop()
 
+def showCourse(idgg):
+    global textboxCoursename 
+    global textboxCoursePreRequis 
+    global textboxCourseSemester 
+    global textboxCourseOptionality 
+    global textboxCourseCredits
+    global textboxCourseStatus
+    foundd = False 
+    for e in ListaCursos:
+        if idgg==e.idCourse:
+            textboxCoursename.configure(text=e.NameCourse)
+            textboxCoursePreRequis.configure(text=e.PreRequisite)
+            textboxCourseSemester.configure(text=e.Semester)
+            textboxCourseOptionality.configure(text=e.Optionality)
+            textboxCourseCredits.configure(text=e.Credits)
+            textboxCourseStatus.configure(text=e.Status)
+            foundd=True
+            print(" ID Curso: " +e.idCourse + " |Curso: "+e.NameCourse+" |PreReQuisito: " +e.PreRequisite+" |Opcionalidad: " +e.Optionality+ " |Semestre: " + e.Semester + " |Creditos: " + e.Credits + " |Estados: " + e.Status)
+    if (foundd==True):
+        messagebox.showinfo("Curso","Curso Encontrado :)")
+    else:
+        messagebox.showinfo("Curso","Curso No Encontrado :'v")
+
+
+def window_showcourse():
+    global wndw_managecourse
+    global wndw_showcourse
+    wndw_managecourse.destroy()
+
+    global textboxCoursename 
+    global textboxCoursePreRequis 
+    global textboxCourseSemester 
+    global textboxCourseOptionality 
+    global textboxCourseCredits
+    global textboxCourseStatus 
+    
+    #Configuración ventana gestionar archivos
+    wndw_showcourse = tk.Tk()
+    wndw_showcourse.title("Mostrar Curso")
+    wndw_showcourse.resizable(0,0)
+    wndw_showcourse.iconbitmap("img/show.ico")
+    wndw_showcourse.geometry("820x580")
+    wndw_showcourse.config(bg="#C9A4F9")
+    wndw_showcourse.config(bd=30)
+    wndw_showcourse.config(relief="groove")
+
+    #Configuraciones Labels
+    labelCourseid=Label(wndw_showcourse,text="Codigo: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCourseid.place(x=70,y=50)
+
+    labelCourseName=Label(wndw_showcourse,text="Nombre: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCourseName.place(x=70,y=100)
+
+    labelCoursePrerequisite=Label(wndw_showcourse,text="PreRequisito: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCoursePrerequisite.place(x=70,y=150)
+
+    labelCourseSemestre=Label(wndw_showcourse,text="Semestre: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCourseSemestre.place(x=70,y=200)
+    
+    labelCourseOptionality=Label(wndw_showcourse,text="Opcionalidad: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCourseOptionality.place(x=70,y=250)
+
+    labelCourseCredits=Label(wndw_showcourse,text="Créditos: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCourseCredits.place(x=70,y=300)
+
+    labelCourseStatus=Label(wndw_showcourse,text="Estado: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    labelCourseStatus.place(x=70,y=350)
+
+    textboxCoursename=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCoursename.place(x=265,y=105,width=370,height=25)
+    
+
+    textboxCoursePreRequis=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCoursePreRequis.place(x=265,y=155,width=370,height=25)
+    
+
+    textboxCourseSemester=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseSemester.place(x=265,y=205,width=370,height=25)
+ 
+
+    textboxCourseOptionality=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseOptionality.place(x=265,y=255,width=370,height=25)
+
+
+    textboxCourseCredits=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseCredits.place(x=265,y=305,width=370,height=25)
+
+
+    textboxCourseStatus=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseStatus.place(x=265,y=355,width=370,height=25)
+    
+    
+    #Configuracion textbox
+    textboxCourseid=Entry(wndw_showcourse)
+    textboxCourseid.place(x=265,y=55,width=150,height=25)   
+    
+    #Configuración botones
+    buttonBackManageCoursee=Button(wndw_showcourse,text="Regresar",width=12,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackManageCourseFromShowCourse)
+    buttonBackManageCoursee.place(x=610,y=465)
+
+    buttonShowCourse=Button(wndw_showcourse,text="Mostrar",width=15,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=7,command=lambda:showCourse(textboxCourseid.get().strip()))
+    buttonShowCourse.place(x=450,y=45)
+
+    wndw_showcourse.mainloop()
+
+def addCourse(niuIdCourse):
+    global ContaCursos
+    global ListaCursos
+    addgg = False 
+    global textboxCourseidadd
+    global textboxCoursenameadd
+    global textboxCoursePreRequisadd
+    global textboxCourseSemesteradd
+    global textboxCourseOptionalityadd
+    global textboxCourseCreditsadd
+    global textboxCourseStatusadd
+    if checkCourse(textboxCourseidadd.get())==False:
+        niuCourse= Curso(textboxCourseidadd.get(),textboxCoursenameadd.get(),textboxCoursePreRequisadd.get(),textboxCourseOptionalityadd.get(),textboxCourseSemesteradd.get(),textboxCourseCreditsadd.get(),textboxCourseStatusadd.get())
+        ListaCursos.append(niuCourse)
+        ContaCursos+=1
+        addgg=True
+        for e in ListaCursos:
+            print(" ID Curso: " +str(e.idCourse) + " |Curso: "+str(e.NameCourse)+" |PreReQuisito: " +str(e.PreRequisite)+" |Opcionalidad: " +str(e.Optionality)+ " |Semestre: " + str(e.Semester )+ " |Creditos: " + str(e.Credits) + " |Estados: " +str( e.Status))
+        print("Cursos ahora: ",ContaCursos)
+    else:
+        pass
+    
+    if (addgg==True):
+        messagebox.showinfo("Curso","Curso Agregado :)")
+    else:
+        messagebox.showinfo("Curso","Ingrese un id válido")
+
+
+def checkCourse(idgg):
+    global ListaCursos
+    for e in ListaCursos:
+        if(e.idCourse==idgg):
+            return True
+    return False
+
 def window_addcourse():
     global wndw_managecourse
     global wndw_addcourse
     wndw_managecourse.destroy()
 
-    wndw_listcourse
+    global textboxCourseidadd
+    global textboxCoursenameadd
+    global textboxCoursePreRequisadd
+    global textboxCourseSemesteradd
+    global textboxCourseOptionalityadd
+    global textboxCourseCreditsadd
+    global textboxCourseStatusadd
+
     #Configuración ventana gestionar archivos
     wndw_addcourse = tk.Tk()
     wndw_addcourse.title("Agregar Curso")
@@ -259,40 +485,79 @@ def window_addcourse():
     labelCourseStatus.place(x=70,y=350)
 
     #Configuracion textbox
-    textboxCourseid=Entry(wndw_addcourse)
-    textboxCourseid.place(x=265,y=55,width=370,height=25)
+    textboxCourseidadd=Entry(wndw_addcourse)
+    textboxCourseidadd.place(x=265,y=55,width=370,height=25)
     
-    textboxCoursename=Entry(wndw_addcourse)
-    textboxCoursename.place(x=265,y=105,width=370,height=25)
+    textboxCoursenameadd=Entry(wndw_addcourse)
+    textboxCoursenameadd.place(x=265,y=105,width=370,height=25)
 
-    textboxCoursePreRequis=Entry(wndw_addcourse)
-    textboxCoursePreRequis.place(x=265,y=155,width=370,height=25)
+    textboxCoursePreRequisadd=Entry(wndw_addcourse)
+    textboxCoursePreRequisadd.place(x=265,y=155,width=370,height=25)
 
-    textboxCourseSemester=Entry(wndw_addcourse)
-    textboxCourseSemester.place(x=265,y=205,width=370,height=25)
+    textboxCourseSemesteradd=Entry(wndw_addcourse)
+    textboxCourseSemesteradd.place(x=265,y=205,width=370,height=25)
 
-    textboxCourseOptionality=Entry(wndw_addcourse)
-    textboxCourseOptionality.place(x=265,y=255,width=370,height=25)
+    textboxCourseOptionalityadd=Entry(wndw_addcourse)
+    textboxCourseOptionalityadd.place(x=265,y=255,width=370,height=25)
 
-    textboxCourseCredits=Entry(wndw_addcourse)
-    textboxCourseCredits.place(x=265,y=305,width=370,height=25)
+    textboxCourseCreditsadd=Entry(wndw_addcourse)
+    textboxCourseCreditsadd.place(x=265,y=305,width=370,height=25)
 
-    textboxCourseStatus=Entry(wndw_addcourse)
-    textboxCourseStatus.place(x=265,y=355,width=370,height=25)
+    textboxCourseStatusadd=Entry(wndw_addcourse)
+    textboxCourseStatusadd.place(x=265,y=355,width=370,height=25)
     
     #Configuración botones
     buttonBackManageCoursee=Button(wndw_addcourse,text="Regresar",width=12,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackManageCourseFromAddCourse)
     buttonBackManageCoursee.place(x=610,y=465)
 
-    buttonAddCourse=Button(wndw_addcourse,text="Agregar",width=15,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=7)
+    buttonAddCourse=Button(wndw_addcourse,text="Agregar",width=15,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=7,command=lambda:addCourse(textboxCourseidadd))
     buttonAddCourse.place(x=340,y=400)
 
     wndw_addcourse.mainloop()
+
+def editCourse(idxd):
+    global ListaCursos
+    editgg = False 
+    global textboxEditCourseided
+    global textboxEditCoursenameed
+    global textboxEditCoursePreRequised
+    global textboxEditCourseSemestered
+    global textboxEditCourseOptionalityed
+    global textboxEditCourseCreditsed
+    global textboxEditCourseStatused
+    if (checkCourse(textboxEditCourseided.get())==True):
+        for r in ListaCursos:
+            if(str(r.idCourse)==textboxEditCourseided.get()):
+                r.idCourse = textboxEditCourseided.get()
+                r.NameCourse = textboxEditCoursenameed.get()
+                r.PreRequisite = textboxEditCoursePreRequised.get()
+                r.Optionality = textboxEditCourseOptionalityed.get()
+                r.Semester =  textboxEditCourseSemestered.get()
+                r.Credits = textboxEditCourseCreditsed.get()
+                r.Status = textboxEditCourseStatused.get()
+                editgg=True
+    else:
+        pass
+
+    if (editgg==True):
+        messagebox.showinfo("Curso","Curso Editado :)")
+    else:
+        messagebox.showinfo("Curso","Ingrese un id válido")
 
 def window_editcourse():
     global wndw_managecourse
     global wndw_editcourse
     wndw_managecourse.destroy()
+    
+
+    global textboxEditCourseided
+    global textboxEditCoursenameed
+    global textboxEditCoursePreRequised
+    global textboxEditCourseSemestered
+    global textboxEditCourseOptionalityed
+    global textboxEditCourseCreditsed
+    global textboxEditCourseStatused
+
     #Configuración ventana gestionar archivos
     wndw_editcourse = tk.Tk()
     wndw_editcourse.title("Editar Curso")
@@ -326,39 +591,59 @@ def window_editcourse():
     labelEditCourseStatus.place(x=70,y=350)
 
     #Configuracion textbox
-    textboxEditCourseid=Entry(wndw_editcourse)
-    textboxEditCourseid.place(x=265,y=55,width=370,height=25)
+    textboxEditCourseided=Entry(wndw_editcourse)
+    textboxEditCourseided.place(x=265,y=55,width=370,height=25)
     
-    textboxEditCoursename=Entry(wndw_editcourse)
-    textboxEditCoursename.place(x=265,y=105,width=370,height=25)
+    textboxEditCoursenameed=Entry(wndw_editcourse)
+    textboxEditCoursenameed.place(x=265,y=105,width=370,height=25)
 
-    textboxEditCoursePreRequis=Entry(wndw_editcourse)
-    textboxEditCoursePreRequis.place(x=265,y=155,width=370,height=25)
+    textboxEditCoursePreRequised=Entry(wndw_editcourse)
+    textboxEditCoursePreRequised.place(x=265,y=155,width=370,height=25)
 
-    textboxEditCourseSemester=Entry(wndw_editcourse)
-    textboxEditCourseSemester.place(x=265,y=205,width=370,height=25)
+    textboxEditCourseSemestered=Entry(wndw_editcourse)
+    textboxEditCourseSemestered.place(x=265,y=205,width=370,height=25)
 
-    textboxEditCourseOptionality=Entry(wndw_editcourse)
-    textboxEditCourseOptionality.place(x=265,y=255,width=370,height=25)
+    textboxEditCourseOptionalityed=Entry(wndw_editcourse)
+    textboxEditCourseOptionalityed.place(x=265,y=255,width=370,height=25)
 
-    textboxEditCourseCredits=Entry(wndw_editcourse)
-    textboxEditCourseCredits.place(x=265,y=305,width=370,height=25)
+    textboxEditCourseCreditsed=Entry(wndw_editcourse)
+    textboxEditCourseCreditsed.place(x=265,y=305,width=370,height=25)
 
-    textboxEditCourseStatus=Entry(wndw_editcourse)
-    textboxEditCourseStatus.place(x=265,y=355,width=370,height=25)
+    textboxEditCourseStatused=Entry(wndw_editcourse)
+    textboxEditCourseStatused.place(x=265,y=355,width=370,height=25)
     
     #Configuración botones
     buttonBackManageCoursse=Button(wndw_editcourse,text="Regresar",width=12,bg="#E99EFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackManageCourseFromEditCourse)
     buttonBackManageCoursse.place(x=610,y=465)
 
-    buttonEditCourse=Button(wndw_editcourse,text="Editar",width=15,bg="#E99EFF", font=("Courier 13 bold"),relief="ridge",bd=7)
+    buttonEditCourse=Button(wndw_editcourse,text="Editar",width=15,bg="#E99EFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=lambda:editCourse(textboxEditCourseided))
     buttonEditCourse.place(x=340,y=400)
     wndw_editcourse.mainloop()
+
+def deleteCourse(idd):
+    global ListaCursos
+    global ContaCursos
+    global textboxidCoursedel
+    dele = False
+    if (checkCourse(textboxidCoursedel.get())==True):
+        for i in ListaCursos:
+            if(i.idCourse==str(textboxidCoursedel.get())):
+                ListaCursos.remove(i)
+                ContaCursos-=1
+                dele=True
+        print("Cursos Ahora: ",ContaCursos)
+    else:
+        pass
+    if (dele==True):
+        messagebox.showinfo("Curso","Curso Eliminado :)")
+    else:
+        messagebox.showinfo("Curso","Ingrese un id válido")
 
 def window_deleteCourse():
     global wndw_managecourse
     global wndw_deletecourse
     wndw_managecourse.destroy()
+    global textboxidCoursedel
     #Configuración ventana cargar archivos
     wndw_deletecourse = tk.Tk()
     wndw_deletecourse.title("Eliminar Curso")
@@ -372,10 +657,10 @@ def window_deleteCourse():
     labelidCourse=Label(wndw_deletecourse,text="Código de Curso:",fg="black",font=("Courier 18 bold"),bg="#AFF5FF")
     labelidCourse.place(x=20,y=80)
     #Configuracion textbox
-    textboxidCourse=Entry(wndw_deletecourse)
-    textboxidCourse.place(x=250,y=84,width=360,height=24)
+    textboxidCoursedel=Entry(wndw_deletecourse)
+    textboxidCoursedel.place(x=250,y=84,width=360,height=24)
     #Configuración Botones
-    buttonDeleteCourse=Button(wndw_deletecourse,text="Eliminar",width=11,bg="#AFF5FF", font=("Courier 13 bold"),relief="ridge",bd=8)
+    buttonDeleteCourse=Button(wndw_deletecourse,text="Eliminar",width=11,bg="#AFF5FF", font=("Courier 13 bold"),relief="ridge",bd=8,command=lambda:deleteCourse(textboxidCoursedel))
     buttonDeleteCourse.place(x=360,y=130)
 
     buttonBackManageCourssee=Button(wndw_deletecourse,text="Regresar",width=11,bg="#AFF5FF", font=("Courier 13 bold"),relief="ridge",bd=8,command=getBackManageCourseFromDeleteCourse)
