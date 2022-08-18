@@ -46,4 +46,3 @@ class Curso:
         return self.Status
     def setStatus(self,Status):
         self.Status=Status
-

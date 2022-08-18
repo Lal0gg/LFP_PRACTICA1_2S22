@@ -1,5 +1,5 @@
 from tkinter import filedialog, Tk, messagebox
-messagebox.showerror("Hola","gg")
+print(4+7+3+6+3+4+7+3+5+2+5+4+10+6+5+5+5+6+5+6+6)
 # lista = []
 
 # def abrir():
@@ -62,3 +62,4 @@ messagebox.showerror("Hola","gg")
 #     niuLine[7]=statusaux
 #     Cursonew=Curso(idcourseaux,namecourseaux,prerequisiteaux,optinalityaux,creditsaux,statusaux)
 # ListaCursos.append(Cursonew)
+

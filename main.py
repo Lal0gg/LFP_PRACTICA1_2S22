@@ -1,3 +1,4 @@
+from cgitb import text
 import os
 from queue import Empty
 import tkinter as tk
@@ -5,6 +6,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter.ttk import Treeview
+from tokenize import String
 from typing import Counter
 from curso import Curso
 
@@ -52,6 +54,9 @@ textboxEditCourseStatused= None
 
 #TextBox Para eliminar Curso
 textboxidCoursedel = None
+
+#Variable para el módulo créditos
+totalCreditinNSemester=0
 def getBackMainMenuFromManage():
     global wndw_managecourse
     wndw_managecourse.destroy()
@@ -208,8 +213,7 @@ def window_fileupload():
     #Configuracion textbox
     textboxRoute=Entry(wndw_fileupload)
     textboxRoute.place(x=195,y=84,width=300,height=24)
-
-
+    
     #Configuración Botones
     buttonSelectRoute=Button(wndw_fileupload,text="Seleccionar",width=11,bg="#C9A4F9", font=("Courier 13 bold"),relief="ridge",bd=8,command=lambda:readFile(textboxRoute.get().strip()))
     buttonSelectRoute.place(x=270,y=140)
@@ -248,7 +252,6 @@ def window_managecourse():
     buttonBackmainmenu=Button(wndw_managecourse,text="Regresar",width=15,bg="#9EBCFF", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackMainMenuFromManage)
     buttonBackmainmenu.place(x=250,y=350)
     wndw_managecourse.mainloop()
-
 
 def window_listcouse():
     global ListaCursos
@@ -321,7 +324,6 @@ def showCourse(idgg):
         messagebox.showinfo("Curso","Curso Encontrado :)")
     else:
         messagebox.showinfo("Curso","Curso No Encontrado :'v")
-
 
 def window_showcourse():
     global wndw_managecourse
@@ -430,7 +432,6 @@ def addCourse(niuIdCourse):
         messagebox.showinfo("Curso","Curso Agregado :)")
     else:
         messagebox.showinfo("Curso","Ingrese un id válido")
-
 
 def checkCourse(idgg):
     global ListaCursos
@@ -667,7 +668,198 @@ def window_deleteCourse():
     buttonBackManageCourssee.place(x=520,y=235)
     wndw_deletecourse.mainloop()
 
+def CrediCountNsemester():
+    global semestern
+    global totalCreditinNSemester
+    sumApprovedN=0
+    sumTakingN=0
+    sumPendingN=0
+    if(semestern.get()=='1'):
+        for r in ListaCursos:
+            if(r.Semester=='1'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 1 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='2'):
+        for r in ListaCursos:
+            if(r.Semester=='2'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 2 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='3'):
+        for r in ListaCursos:
+            if(r.Semester=='3'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 3 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='4'):
+        for r in ListaCursos:
+            if(r.Semester=='4'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 4 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='5'):
+        for r in ListaCursos:
+            if(r.Semester=='5'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 5 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='6'):
+        for r in ListaCursos:
+            if(r.Semester=='6'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 6 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='7'):
+        for r in ListaCursos:
+            if(r.Semester=='7'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 7 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='8'):
+        for r in ListaCursos:
+            if(r.Semester=='8'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 8 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='9'):
+        for r in ListaCursos:
+            if(r.Semester=='9'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 9 es: " +str(totalCreditinNSemester))
+    elif(semestern.get()=='10'):
+        for r in ListaCursos:
+            if(r.Semester=='10'):
+                if(r.Status=='0'):
+                    credit =int(r.Credits)
+                    sumApprovedN=sumApprovedN+credit
+                elif(r.Status=='1'):
+                    credit1 =int(r.Credits)
+                    sumTakingN=sumTakingN+credit1
+                elif(r.Status=='-1'):
+                    credit2 =int(r.Credits)
+                    sumPendingN=sumPendingN+credit2
+        totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        print()
+        print("El Total de creditos Aprobados es: ",sumApprovedN)
+        print("El Total de creditos Cursando es: ",sumTakingN)
+        print("El Total de creditos Pendientes es: ",sumPendingN)
+        print("Total de Créditos en Semestre 10 es: " +str(totalCreditinNSemester))
+
 def window_creditcount():
+    global semester
+    global semestern
+    global totalCreditinNSemester
+    global ListaCursos
     global wndw_credicount
     global wndw_menu
     wndw_menu.destroy()
@@ -679,25 +871,63 @@ def window_creditcount():
     wndw_credicount.config(bg="#48F1D8")
     wndw_credicount.config(bd=30)
     wndw_credicount.config(relief="groove")
+
+    #Función para el conteo de creditos
+    sumApproved=0
+    sumTaking=0
+    sumPending=0
+    for r in ListaCursos:
+        if(r.Status=='0'):
+            credit =int(r.Credits)
+            sumApproved=sumApproved+credit
+        elif(r.Status=='1'):
+            credit1 =int(r.Credits)
+            sumTaking=sumTaking+credit1
+        elif(r.Status=='-1'):
+            credit2 =int(r.Credits)
+            sumPending=sumPending+credit2
+    print()
+    print("El Total de creditos Aprobados es: ",sumApproved)
+    print("El Total de creditos Cursando es: ",sumTaking)
+    print("El Total de creditos Pendientes es: ",sumPending)
+
+    #Función para el conteo de 
     
+    # one ='1'
+    # two ='2'
+    # three ='3'
+    # four ='4'
+    # five ='5'
+    # six ='6'
+    # seven ='7'
+    # eight ='8'
+    # nine ='9'
+    # ten='10'
+    # one,two,three,four,five,six,seven,eight,nine,ten
+
+
+
     #Configuraciones Labels
     labelApprovedCredits=Label(wndw_credicount,text="Créditos Aprobados:",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelApprovedCredits.place(x=20,y=50)
 
-    labelApprovedCreditss=Label(wndw_credicount,text="XX",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
+    labelApprovedCreditss=Label(wndw_credicount,fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelApprovedCreditss.place(x=250,y=50)
+    labelApprovedCreditss.configure(text=sumApproved)
 
     labelTakingCredits=Label(wndw_credicount,text="Créditos Cursando:",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelTakingCredits.place(x=20,y=90)
 
-    labelTakingCreditss=Label(wndw_credicount,text="XX",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
+    labelTakingCreditss=Label(wndw_credicount,fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelTakingCreditss.place(x=250,y=90)
+    labelTakingCreditss.configure(text=sumTaking)
 
     labelPendingCredits=Label(wndw_credicount,text="Créditos Pendientes:",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelPendingCredits.place(x=20,y=130)
-
-    labelPendingCreditss=Label(wndw_credicount,text="XX",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
+    
+    labelPendingCreditss=Label(wndw_credicount,fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelPendingCreditss.place(x=270,y=130)
+    labelPendingCreditss.configure(text=sumPending)
 
     labelrequiredCredits=Label(wndw_credicount,text="Créditos Obligatarios hasta semestre N:",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelrequiredCredits.place(x=20,y=170)
@@ -708,23 +938,28 @@ def window_creditcount():
     labelCreditsSemester=Label(wndw_credicount,text="Créditos del semestre:",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelCreditsSemester.place(x=20,y=280)
 
-    labelCreditsSemester=Label(wndw_credicount,text="Semestre",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
+    labelCreditsSemester=Label(wndw_credicount,text="SemestreN",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelCreditsSemester.place(x=60,y=340)
 
 
     #Configuracion textbox
-    textboxNrequiredCredits=Entry(wndw_credicount)
+    textboxNrequiredCredits=Entry(wndw_credicount,state=DISABLED)
     textboxNrequiredCredits.place(x=500,y=170,width=100,height=30)
-
-    textboxCreditsSemester=Entry(wndw_credicount)
+    
+    textboxCreditsSemester=Entry(wndw_credicount,state=DISABLED)
     textboxCreditsSemester.place(x=300,y=280,width=100,height=30)
 
+
     #Configuración SpinBox
-    spinBoxSemester= Spinbox(wndw_credicount,from_=0, to=10,font=("Courier 15 bold"))
+    semester =StringVar()
+    semestern=StringVar()
+
+    spinBoxSemester= Spinbox(wndw_credicount,textvariable=semester,values=("1","2","3","4","5","6","7","8","9","10"),font=("Courier 15 bold"))
     spinBoxSemester.place(x=190,y=220,width=50,height=30)
 
-    spinBoxCreditsSemester= Spinbox(wndw_credicount,from_=0, to=10,font=("Courier 15 bold"))
+    spinBoxCreditsSemester= Spinbox(wndw_credicount,textvariable=semestern,values=("1","2","3","4","5","6","7","8","9","10"),font=("Courier 15 bold"))
     spinBoxCreditsSemester.place(x=190,y=340,width=50,height=30)
+    
 
     #Configuración botones
     buttonBackManageCouurse=Button(wndw_credicount,text="Regresar",width=15,bg="#48F1D8", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackMainMenuFromCreditCount)
@@ -733,12 +968,10 @@ def window_creditcount():
     buttonCountSemesters=Button(wndw_credicount,text="Contar",width=10,bg="#48F1D8", font=("Courier 11 bold"),relief="groove",bd=7)
     buttonCountSemesters.place(x=280,y=213)
 
-    buttonCreditsSemester=Button(wndw_credicount,text="Contar",width=10,bg="#48F1D8", font=("Courier 11 bold"),relief="groove",bd=7)
+    buttonCreditsSemester=Button(wndw_credicount,text="Contar",width=10,bg="#48F1D8", font=("Courier 11 bold"),relief="groove",bd=7,command=CrediCountNsemester)
     buttonCreditsSemester.place(x=280,y=338)
-
+    
     wndw_credicount.mainloop()
-
-
 
 
 #readFile()
