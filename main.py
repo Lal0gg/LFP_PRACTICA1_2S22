@@ -1271,6 +1271,7 @@ def CrediCountNSemesterObligatory():
         sumObligatory8=0
         sumObligatory9=0
         sumObligatory10=0
+
 def window_creditcount():
     global semester
     global semestern
