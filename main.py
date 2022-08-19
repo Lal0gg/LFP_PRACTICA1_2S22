@@ -671,6 +671,9 @@ def window_deleteCourse():
 def CrediCountNsemester():
     global semestern
     global totalCreditinNSemester
+    global sendDataCredit
+    
+
     sumApprovedN=0
     sumTakingN=0
     sumPendingN=0
@@ -687,6 +690,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -705,6 +709,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -723,6 +728,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -741,6 +747,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -759,6 +766,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -777,6 +785,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -795,6 +804,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -813,6 +823,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -831,6 +842,7 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
@@ -849,16 +861,423 @@ def CrediCountNsemester():
                     credit2 =int(r.Credits)
                     sumPendingN=sumPendingN+credit2
         totalCreditinNSemester = sumApprovedN+sumTakingN+sumPendingN
+        sendDataCredit.set(totalCreditinNSemester)
         print()
         print("El Total de creditos Aprobados es: ",sumApprovedN)
         print("El Total de creditos Cursando es: ",sumTakingN)
         print("El Total de creditos Pendientes es: ",sumPendingN)
         print("Total de Créditos en Semestre 10 es: " +str(totalCreditinNSemester))
 
+def CrediCountNSemesterObligatory():
+    global semester
+    global sendDataCreditN
+    global ListaCursos
+    sumObligatory1=0
+    sumObligatory2=0
+    sumObligatory3=0
+    sumObligatory4=0
+    sumObligatory5=0
+    sumObligatory6=0
+    sumObligatory7=0
+    sumObligatory8=0
+    sumObligatory9=0
+    sumObligatory10=0
+
+    if(semester.get()=='1'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+        sendDataCreditN.set(sumObligatory1)
+        print("")
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(sumObligatory1))
+        sumObligatory1=0
+    elif(semester.get()=='2'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+        tot=sumObligatory1+sumObligatory2
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+    elif(semester.get()=='3'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+    elif(semester.get()=='4'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+    elif(semester.get()=='5'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+            elif(e.Semester=='5'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory5=sumObligatory5+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4+sumObligatory5
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Semestre 5: " + str(sumObligatory5))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+        sumObligatory5=0
+    elif(semester.get()=='6'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+            elif(e.Semester=='5'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory5=sumObligatory5+credit
+            elif(e.Semester=='6'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory6=sumObligatory6+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4+sumObligatory5+sumObligatory6
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Semestre 5: " + str(sumObligatory5))
+        print("Semestre 6: " + str(sumObligatory6))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+        sumObligatory5=0
+        sumObligatory6=0
+    elif(semester.get()=='7'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+            elif(e.Semester=='5'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory5=sumObligatory5+credit
+            elif(e.Semester=='6'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory6=sumObligatory6+credit
+            elif(e.Semester=='7'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory7=sumObligatory7+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4+sumObligatory5+sumObligatory6+sumObligatory7
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Semestre 5: " + str(sumObligatory5))
+        print("Semestre 6: " + str(sumObligatory6))
+        print("Semestre 7: " + str(sumObligatory7))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+        sumObligatory5=0
+        sumObligatory6=0
+        sumObligatory7=0
+    elif(semester.get()=='8'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+            elif(e.Semester=='5'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory5=sumObligatory5+credit
+            elif(e.Semester=='6'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory6=sumObligatory6+credit
+            elif(e.Semester=='7'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory7=sumObligatory7+credit
+            elif(e.Semester=='8'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory8=sumObligatory8+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4+sumObligatory5+sumObligatory6+sumObligatory7+sumObligatory8
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Semestre 5: " + str(sumObligatory5))
+        print("Semestre 6: " + str(sumObligatory6))
+        print("Semestre 7: " + str(sumObligatory7))
+        print("Semestre 8: " + str(sumObligatory8))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+        sumObligatory5=0
+        sumObligatory6=0
+        sumObligatory7=0
+        sumObligatory8=0
+    elif(semester.get()=='9'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+            elif(e.Semester=='5'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory5=sumObligatory5+credit
+            elif(e.Semester=='6'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory6=sumObligatory6+credit
+            elif(e.Semester=='7'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory7=sumObligatory7+credit
+            elif(e.Semester=='8'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory8=sumObligatory8+credit
+            elif(e.Semester=='9'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory9=sumObligatory9+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4+sumObligatory5+sumObligatory6+sumObligatory7+sumObligatory8+sumObligatory9
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Semestre 5: " + str(sumObligatory5))
+        print("Semestre 6: " + str(sumObligatory6))
+        print("Semestre 7: " + str(sumObligatory7))
+        print("Semestre 8: " + str(sumObligatory8))
+        print("Semestre 9: " + str(sumObligatory9))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+        sumObligatory5=0
+        sumObligatory6=0
+        sumObligatory7=0
+        sumObligatory8=0
+        sumObligatory9=0
+    elif(semester.get()=='10'):
+        for e in ListaCursos:
+            if(e.Semester=='1'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory1=sumObligatory1+credit
+            elif(e.Semester=='2'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory2=sumObligatory2+credit
+            elif(e.Semester=='3'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory3=sumObligatory3+credit
+            elif(e.Semester=='4'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory4=sumObligatory4+credit
+            elif(e.Semester=='5'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory5=sumObligatory5+credit
+            elif(e.Semester=='6'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory6=sumObligatory6+credit
+            elif(e.Semester=='7'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory7=sumObligatory7+credit
+            elif(e.Semester=='8'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory8=sumObligatory8+credit
+            elif(e.Semester=='9'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory9=sumObligatory9+credit
+            elif(e.Semester=='10'):
+                if(e.Optionality=='1'):
+                    credit =int(e.Credits)
+                    sumObligatory10=sumObligatory10+credit
+        tot=sumObligatory1+sumObligatory2+sumObligatory3+sumObligatory4+sumObligatory5+sumObligatory6+sumObligatory7+sumObligatory8+sumObligatory9+sumObligatory10
+        sendDataCreditN.set(tot)
+        print("")
+        print("Semestre 1: " + str(sumObligatory1))
+        print("Semestre 2: " + str(sumObligatory2))
+        print("Semestre 3: " + str(sumObligatory3))
+        print("Semestre 4: " + str(sumObligatory4))
+        print("Semestre 5: " + str(sumObligatory5))
+        print("Semestre 6: " + str(sumObligatory6))
+        print("Semestre 7: " + str(sumObligatory7))
+        print("Semestre 8: " + str(sumObligatory8))
+        print("Semestre 9: " + str(sumObligatory9))
+        print("Semestre 10: " + str(sumObligatory10))
+        print("Los créditos hasta el semestre   " +  semester.get() + " son: " + str(tot))
+        sumObligatory1=0
+        sumObligatory2=0
+        sumObligatory3=0
+        sumObligatory4=0
+        sumObligatory5=0
+        sumObligatory6=0
+        sumObligatory7=0
+        sumObligatory8=0
+        sumObligatory9=0
+        sumObligatory10=0
 def window_creditcount():
     global semester
     global semestern
+    global sendDataCredit
+    global sendDataCreditN
     global totalCreditinNSemester
+    global textboxCreditsSemester
     global ListaCursos
     global wndw_credicount
     global wndw_menu
@@ -866,6 +1285,7 @@ def window_creditcount():
     #Configuración ventana lista de cursos
     wndw_credicount = tk.Tk()
     wndw_credicount.title("Conteo de Créditos")
+    wndw_credicount.resizable(0,0)
     wndw_credicount.iconbitmap("img/credit.ico")
     wndw_credicount.geometry("820x580")
     wndw_credicount.config(bg="#48F1D8")
@@ -943,13 +1363,14 @@ def window_creditcount():
 
 
     #Configuracion textbox
-    textboxNrequiredCredits=Entry(wndw_credicount,state=DISABLED)
+    sendDataCreditN=StringVar()
+    textboxNrequiredCredits=Entry(wndw_credicount,text=sendDataCreditN,state=DISABLED,justify='center',font=("Courier 15 bold"))
     textboxNrequiredCredits.place(x=500,y=170,width=100,height=30)
     
-    textboxCreditsSemester=Entry(wndw_credicount,state=DISABLED)
+    sendDataCredit=StringVar()
+    textboxCreditsSemester=Entry(wndw_credicount,text=sendDataCredit,state=DISABLED,justify='center',font=("Courier 15 bold"))
     textboxCreditsSemester.place(x=300,y=280,width=100,height=30)
-
-
+    
     #Configuración SpinBox
     semester =StringVar()
     semestern=StringVar()
@@ -965,7 +1386,7 @@ def window_creditcount():
     buttonBackManageCouurse=Button(wndw_credicount,text="Regresar",width=15,bg="#48F1D8", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackMainMenuFromCreditCount)
     buttonBackManageCouurse.place(x=575,y=460)
 
-    buttonCountSemesters=Button(wndw_credicount,text="Contar",width=10,bg="#48F1D8", font=("Courier 11 bold"),relief="groove",bd=7)
+    buttonCountSemesters=Button(wndw_credicount,text="Contar",width=10,bg="#48F1D8", font=("Courier 11 bold"),relief="groove",bd=7,command=CrediCountNSemesterObligatory)
     buttonCountSemesters.place(x=280,y=213)
 
     buttonCreditsSemester=Button(wndw_credicount,text="Contar",width=10,bg="#48F1D8", font=("Courier 11 bold"),relief="groove",bd=7,command=CrediCountNsemester)
@@ -974,5 +1395,4 @@ def window_creditcount():
     wndw_credicount.mainloop()
 
 
-#readFile()
 window_mainMenu()
