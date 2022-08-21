@@ -9,6 +9,20 @@ from tkinter.ttk import Treeview
 from tokenize import String
 from typing import Counter
 from curso import Curso
+"""
+017,Social Humanística 1,,1,1,4,0
+101,Matemática básica 1,,1,1,7,0
+069,Técnica complementaria 1,,1,1,3,0
+039,Deportes 1,,0,1,1,-1
+348,Quimica General 1,,1,1,3,0
+006,Idioma técnico 1,,0,1,2,0
+019,Social Humanística 2,17,1,2,4,0
+103,Matemática básica 2,103,1,2,7,0
+147,Física básica,101,1,2,5,0
+008,Idioma técnico 2,6,0,2,2,0
+960,Mate de computo 1,103,1,3,5,-1
+150,Física 1,103;147,1,3,6,1
+"""
 
 #Variables Para Las Ventanas
 wndw_menu = None
@@ -24,7 +38,7 @@ wndw_showcourse=None
 #Lista de Cursos
 ListaCursos=[]
 #Contador de Cursos
-ContaCursos =0
+ContaCursos =1
 
 #Variables Para Mostrar Curso
 textboxCoursename =None
@@ -106,7 +120,7 @@ def window_mainMenu():
     global wndw_menu
     #Configuración ventana menu principal
     wndw_menu = tk.Tk()
-    wndw_menu.title("Menu Principal")
+    wndw_menu.title("App-Courses")
     wndw_menu.resizable(0,0)
     wndw_menu.iconbitmap("img/menu.ico")
     wndw_menu.geometry("720x480")
@@ -120,7 +134,7 @@ def window_mainMenu():
     labelNameStudent=Label(wndw_menu,text="Nombre: Eduardo Josué González Cifuentes",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelNameStudent.place(x=80,y=45)
 
-    labelNameidstudent=Label(wndw_menu,text="Carnet: 201900647",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
+    labelNameidstudent=Label(wndw_menu,text="Carnet: 201900647     Sección: A- ",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelNameidstudent.place(x=80,y=70)
     #Configuración Botones
     buttonFileUpload=Button(wndw_menu,text="Cargar Archivo",width=20,bg="#48F1D8", font=("Courier 15 bold"),relief="groove",bd=8,command=window_fileupload)
@@ -134,6 +148,7 @@ def window_mainMenu():
 
     buttonMainMenuOut=Button(wndw_menu,text="Salir",width=20,bg="#48F1D8", font=("Courier 15 bold"),relief="groove",bd=8,command=exit)
     buttonMainMenuOut.place(x=220,y=300)
+
     wndw_menu.mainloop()
 
 def readFile(txt):
@@ -153,41 +168,47 @@ def readFile(txt):
                 messagebox.showwarning("Archivos","Ingrese un archivo correcto")
             else:
                 if(partsOfnameFile[1] == 'lfp'):
-                    file =open(txt,'r', encoding="utf-8")
-                    line=file.read()
-                    file.close()
-                    #print(line)
-                    print("")
-                    newLine = line.split("\n")
-                    for c in newLine:
-                        if c != "":
-                            niuLine= c.split(",")
-                            print(niuLine)
-                            ContaCursos+=1
-                            idcourseaux=0
-                            namecourseaux=""
-                            prerequisiteaux=0
-                            optinalityaux=0
-                            semesteraux=0
-                            creditsaux=0
-                            statusaux=0
-                            idcourseaux=niuLine[0]
-                            namecourseaux = niuLine[1]
-                            prerequisiteaux = niuLine[2]
-                            optinalityaux =niuLine[3]
-                            semesteraux=niuLine[4]
-                            creditsaux =niuLine[5]
-                            statusaux = niuLine[6]
-                            Cursonew=Curso(idcourseaux,namecourseaux,prerequisiteaux,optinalityaux,semesteraux,creditsaux,statusaux)
-                            Cursonew.Counter=ContaCursos
-                            ListaCursos.append(Cursonew)
+                    file=""
+                    if(file==""):
+                        file =open(txt,'r', encoding="utf-8")
+                        line=file.read()
+                        file.close()
+                        #print(line)
+                        print("")
+                        newLine = line.split("\n")
+                        for c in newLine:
+                            if c != "":
+                                niuLine= c.split(",")
+                                idcourseaux=0
+                                namecourseaux=""
+                                prerequisiteaux=0
+                                optinalityaux=0
+                                semesteraux=0
+                                creditsaux=0
+                                statusaux=0
+                                idcourseaux=niuLine[0]
+                                namecourseaux = niuLine[1]
+                                prerequisiteaux = niuLine[2]
+                                optinalityaux =niuLine[3]
+                                semesteraux=niuLine[4]
+                                creditsaux =niuLine[5]
+                                statusaux = niuLine[6]
+                                if(checkCourse(idcourseaux)==False):
+                                    Cursonew=Curso(idcourseaux,namecourseaux,prerequisiteaux,optinalityaux,semesteraux,creditsaux,statusaux)
+                                    Cursonew.Counter=ContaCursos
+                                    ListaCursos.append(Cursonew)
+                                    ContaCursos+=1
+                        print(ListaCursos)
                         for r in ListaCursos:
                             print("____________________________________________________________")
                             print("Curso No. ", str(r.Counter))
                             print(" ID Curso: " +r.idCourse + " |Curso: "+r.NameCourse+" |PreReQuisito: " +r.PreRequisite+" |Opcionalidad: " +r.Optionality+ " |Semestre: " + r.Semester + " |Creditos: " + r.Credits + " |Estados: " + r.Status)
-                    print("Hay " + str(ContaCursos) + " Cursos")
-                    print("")
-                    messagebox.showinfo("Archivos","Archivos Cargados")
+                        print("Hay " + str(ContaCursos) + " Cursos")
+                        print("")
+                        print("")
+                        messagebox.showinfo("Archivos","Archivos Cargados")
+                    else:
+                        messagebox.showinfo("Archivos","Ya Cargo un archivo")
                 else:
                     messagebox.showwarning("Archivos","Ingrese un archivo correcto")
                     print("Ingrese un archivo correcto :( ")
@@ -258,6 +279,8 @@ def window_listcouse():
     global wndw_managecourse
     global wndw_listcourse
     wndw_managecourse.destroy()
+
+    
     #Configuración ventana lista de cursos
     wndw_listcourse = tk.Tk()
     wndw_listcourse.title("Listar Cursos")
@@ -267,6 +290,14 @@ def window_listcouse():
     wndw_listcourse.config(bg="#9EBCFF")
     wndw_listcourse.config(bd=30)
     wndw_listcourse.config(relief="groove")
+
+    style= ttk.Style()
+    style.configure("Treeview",
+        background="#E4A1FF",
+        foreground="black",
+        font=("courier",10,"bold"),
+        rowheight=25,
+        fieldbackground="blue")
 
     #Configuración tabla
     StyleTableColum=ttk.Style()
@@ -292,7 +323,7 @@ def window_listcouse():
     for uwu in ListaCursos:
         Cursosgg.append((uwu.idCourse,uwu.NameCourse,uwu.PreRequisite,uwu.Optionality,uwu.Semester,uwu.Credits,uwu.Status))
     for ewe in Cursosgg:
-        TableListCourse.insert("",tk.END,values=ewe)
+        TableListCourse.insert("",tk.END,values=ewe,tags=('odd'))
 
     TableListCourse.pack()
     TableListCourse.place(x=20,y=35)
@@ -369,27 +400,27 @@ def window_showcourse():
     labelCourseStatus=Label(wndw_showcourse,text="Estado: ",fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
     labelCourseStatus.place(x=70,y=350)
 
-    textboxCoursename=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCoursename=Label(wndw_showcourse,fg="black",font=("Courier 15 bold"),bg="#C9A4F9")
     textboxCoursename.place(x=265,y=105,width=370,height=25)
     
 
-    textboxCoursePreRequis=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCoursePreRequis=Label(wndw_showcourse,fg="black",font=("Courier 15 bold"),bg="#C9A4F9")
     textboxCoursePreRequis.place(x=265,y=155,width=370,height=25)
     
 
-    textboxCourseSemester=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseSemester=Label(wndw_showcourse,fg="black",font=("Courier 15 bold"),bg="#C9A4F9")
     textboxCourseSemester.place(x=265,y=205,width=370,height=25)
  
 
-    textboxCourseOptionality=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseOptionality=Label(wndw_showcourse,fg="black",font=("Courier 15 bold"),bg="#C9A4F9")
     textboxCourseOptionality.place(x=265,y=255,width=370,height=25)
 
 
-    textboxCourseCredits=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseCredits=Label(wndw_showcourse,fg="black",font=("Courier 15 bold"),bg="#C9A4F9")
     textboxCourseCredits.place(x=265,y=305,width=370,height=25)
 
 
-    textboxCourseStatus=Label(wndw_showcourse,fg="black",font=("Courier 18 bold"),bg="#C9A4F9")
+    textboxCourseStatus=Label(wndw_showcourse,fg="black",font=("Courier 15 bold"),bg="#C9A4F9")
     textboxCourseStatus.place(x=265,y=355,width=370,height=25)
     
     
@@ -417,16 +448,20 @@ def addCourse(niuIdCourse):
     global textboxCourseOptionalityadd
     global textboxCourseCreditsadd
     global textboxCourseStatusadd
-    if checkCourse(textboxCourseidadd.get())==False:
-        niuCourse= Curso(textboxCourseidadd.get(),textboxCoursenameadd.get(),textboxCoursePreRequisadd.get(),textboxCourseOptionalityadd.get(),textboxCourseSemesteradd.get(),textboxCourseCreditsadd.get(),textboxCourseStatusadd.get())
-        ListaCursos.append(niuCourse)
-        ContaCursos+=1
-        addgg=True
-        for e in ListaCursos:
-            print(" ID Curso: " +str(e.idCourse) + " |Curso: "+str(e.NameCourse)+" |PreReQuisito: " +str(e.PreRequisite)+" |Opcionalidad: " +str(e.Optionality)+ " |Semestre: " + str(e.Semester )+ " |Creditos: " + str(e.Credits) + " |Estados: " +str( e.Status))
-        print("Cursos ahora: ",ContaCursos)
+    if( (textboxCourseidadd.get() and textboxCoursenameadd.get() and  textboxCourseSemesteradd.get() and textboxCourseOptionalityadd.get() and  textboxCourseCreditsadd.get() and textboxCourseStatusadd.get()) != ""):
+        if checkCourse(textboxCourseidadd.get())==False:
+            niuCourse= Curso(textboxCourseidadd.get(),textboxCoursenameadd.get(),textboxCoursePreRequisadd.get(),textboxCourseOptionalityadd.get(),textboxCourseSemesteradd.get(),textboxCourseCreditsadd.get(),textboxCourseStatusadd.get())
+            ListaCursos.append(niuCourse)
+            ContaCursos+=1
+            addgg=True
+            for e in ListaCursos:
+                print(" ID Curso: " +str(e.idCourse) + " |Curso: "+str(e.NameCourse)+" |PreReQuisito: " +str(e.PreRequisite)+" |Opcionalidad: " +str(e.Optionality)+ " |Semestre: " + str(e.Semester )+ " |Creditos: " + str(e.Credits) + " |Estados: " +str( e.Status))
+            print("Cursos ahora: ",ContaCursos)
+        else:
+            pass
     else:
-        pass
+        messagebox.showinfo("Curso","Los Campos están vacíos")
+
     
     if (addgg==True):
         messagebox.showinfo("Curso","Curso Agregado :)")
@@ -526,19 +561,23 @@ def editCourse(idxd):
     global textboxEditCourseOptionalityed
     global textboxEditCourseCreditsed
     global textboxEditCourseStatused
-    if (checkCourse(textboxEditCourseided.get())==True):
-        for r in ListaCursos:
-            if(str(r.idCourse)==textboxEditCourseided.get()):
-                r.idCourse = textboxEditCourseided.get()
-                r.NameCourse = textboxEditCoursenameed.get()
-                r.PreRequisite = textboxEditCoursePreRequised.get()
-                r.Optionality = textboxEditCourseOptionalityed.get()
-                r.Semester =  textboxEditCourseSemestered.get()
-                r.Credits = textboxEditCourseCreditsed.get()
-                r.Status = textboxEditCourseStatused.get()
-                editgg=True
+    if( (textboxEditCourseided.get() and textboxEditCoursenameed.get() and  textboxEditCourseSemestered.get() and textboxEditCourseOptionalityed.get() and  textboxEditCourseCreditsed.get() and textboxEditCourseStatused.get()) != ""):
+            if (checkCourse(textboxEditCourseided.get())==True):
+                for r in ListaCursos:
+                    if(str(r.idCourse)==textboxEditCourseided.get()):
+                        r.idCourse = textboxEditCourseided.get()
+                        r.NameCourse = textboxEditCoursenameed.get()
+                        r.PreRequisite = textboxEditCoursePreRequised.get()
+                        r.Optionality = textboxEditCourseOptionalityed.get()
+                        r.Semester =  textboxEditCourseSemestered.get()
+                        r.Credits = textboxEditCourseCreditsed.get()
+                        r.Status = textboxEditCourseStatused.get()
+                        editgg=True
+            else:
+                pass
     else:
-        pass
+        messagebox.showinfo("Curso","Los Campos están vacíos")
+
 
     if (editgg==True):
         messagebox.showinfo("Curso","Curso Editado :)")
@@ -673,7 +712,6 @@ def CrediCountNsemester():
     global totalCreditinNSemester
     global sendDataCredit
     
-
     sumApprovedN=0
     sumTakingN=0
     sumPendingN=0
@@ -1310,23 +1348,7 @@ def window_creditcount():
     print()
     print("El Total de creditos Aprobados es: ",sumApproved)
     print("El Total de creditos Cursando es: ",sumTaking)
-    print("El Total de creditos Pendientes es: ",sumPending)
-
-    #Función para el conteo de 
-    
-    # one ='1'
-    # two ='2'
-    # three ='3'
-    # four ='4'
-    # five ='5'
-    # six ='6'
-    # seven ='7'
-    # eight ='8'
-    # nine ='9'
-    # ten='10'
-    # one,two,three,four,five,six,seven,eight,nine,ten
-
-
+    print("El Total de creditos Pendientes es: ",sumPending) 
 
     #Configuraciones Labels
     labelApprovedCredits=Label(wndw_credicount,text="Créditos Aprobados:",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
@@ -1362,7 +1384,6 @@ def window_creditcount():
     labelCreditsSemester=Label(wndw_credicount,text="SemestreN",fg="black",font=("Courier 15 bold"),bg="#48F1D8")
     labelCreditsSemester.place(x=60,y=340)
 
-
     #Configuracion textbox
     sendDataCreditN=StringVar()
     textboxNrequiredCredits=Entry(wndw_credicount,text=sendDataCreditN,state=DISABLED,justify='center',font=("Courier 15 bold"))
@@ -1382,7 +1403,6 @@ def window_creditcount():
     spinBoxCreditsSemester= Spinbox(wndw_credicount,textvariable=semestern,values=("1","2","3","4","5","6","7","8","9","10"),font=("Courier 15 bold"))
     spinBoxCreditsSemester.place(x=190,y=340,width=50,height=30)
     
-
     #Configuración botones
     buttonBackManageCouurse=Button(wndw_credicount,text="Regresar",width=15,bg="#48F1D8", font=("Courier 13 bold"),relief="ridge",bd=7,command=getBackMainMenuFromCreditCount)
     buttonBackManageCouurse.place(x=575,y=460)
@@ -1394,6 +1414,5 @@ def window_creditcount():
     buttonCreditsSemester.place(x=280,y=338)
     
     wndw_credicount.mainloop()
-
 
 window_mainMenu()
