@@ -9,20 +9,6 @@ from tkinter.ttk import Treeview
 from tokenize import String
 from typing import Counter
 from curso import Curso
-"""
-017,Social Humanística 1,,1,1,4,0
-101,Matemática básica 1,,1,1,7,0
-069,Técnica complementaria 1,,1,1,3,0
-039,Deportes 1,,0,1,1,-1
-348,Quimica General 1,,1,1,3,0
-006,Idioma técnico 1,,0,1,2,0
-019,Social Humanística 2,17,1,2,4,0
-103,Matemática básica 2,103,1,2,7,0
-147,Física básica,101,1,2,5,0
-008,Idioma técnico 2,6,0,2,2,0
-960,Mate de computo 1,103,1,3,5,-1
-150,Física 1,103;147,1,3,6,1
-"""
 
 #Variables Para Las Ventanas
 wndw_menu = None
@@ -1343,8 +1329,13 @@ def window_creditcount():
             credit1 =int(r.Credits)
             sumTaking=sumTaking+credit1
         elif(r.Status=='-1'):
-            credit2 =int(r.Credits)
-            sumPending=sumPending+credit2
+            if(r.Optionality=='1'):
+                credit2 =int(r.Credits)
+                sumPending=sumPending+credit2
+            else:
+                pass
+        else:
+            pass
     print()
     print("El Total de creditos Aprobados es: ",sumApproved)
     print("El Total de creditos Cursando es: ",sumTaking)
